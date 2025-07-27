@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1C1C1C" />
+    <meta name="description" content="Welcome to Focus Time - a Pomodoro timer to help you stay focused and productive." />
+    <link rel="icon" href="/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet" />
+    <title>Focus Timer</title>
+
+    <!-- ✅ Критические стили -->
+    <style>
+        :root {
+            --color-text: #EFEFEF;
+            --step-background: #2A2A2A;
+            --step-text: #EFEFEF;
+            --color-gray: #ffffffaa;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: #1C1C1C;
+            color: var(--color-text);
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 32px 16px 120px 32px;
+            color: var(--color-text);
+        }
+
+        .welcome-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .title {
+            font-size: 48px;
+            font-weight: 800;
+        }
+
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 48px;
+            width: 100%;
+            max-width: 1080px;
+        }
+
+        .step-row {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: var(--step-background);
+            padding: 32px 16px;
+            border-radius: 16px;
+            gap: 16px;
+            box-shadow:
+                    0 0 0 1px rgba(255, 255, 255, 0.06),
+                    0 4px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .step-row-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+            object-fit: contain;
+        }
+
+        .step-row-text {
+            text-align: center;
+        }
+
+        .step-row-text h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--step-text);
+        }
+
+        .step-row-text p {
+            font-size: 16px;
+            color: var(--color-gray);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        @media (min-width: 900px) {
+            .step-row {
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: left;
+            }
+
+            .step-row-image {
+                width: 70%;
+            }
+
+            .step-row-text {
+                width: 30%;
+                text-align: left;
+            }
+        }
+    </style>
+    <!-- ✅ Отложенная загрузка основного CSS -->
+    <link rel="stylesheet" href="data:text/css;base64,QGltcG9ydCAnQHJhZGl4LXVpL2NvbG9ycy9ibGFjay1hbHBoYS5jc3MnOwpAaW1wb3J0ICdAcmFkaXgtdWkvY29sb3JzL21hdXZlLmNzcyc7CkBpbXBvcnQgJ0ByYWRpeC11aS9jb2xvcnMvZ3Jhc3MuY3NzJzsKCiosCio6OmJlZm9yZSwKKjo6YWZ0ZXIgewogIGJveC1zaXppbmc6IGJvcmRlci1ib3g7CiAgbWFyZ2luOiAwOwogIGZvbnQtd2VpZ2h0OiBub3JtYWw7Cn0KCjpyb290IHsKICAvKiBEYXJrIFRoZW1lICovCiAgLS1jb2xvci10ZXh0OiAjRUZFRkVGOwogIC0tY29sb3ItdGV4dC1pbnZlcnRlZDogIzIzMjkzMTsKICAtLWNvbG9yLWJhY2tncm91bmQ6ICMxQzFDMUM7CiAgLS1jb2xvci1iYWNrZ3JvdW5kLWludmVydGVkOiAjRkVGRUZFOwogIC0tY29sb3ItZ3JheTogI2ZmZmZmZmFhOwogIC0tc3RlcC1iYWNrZ3JvdW5kOiAjMkEyQTJBOwogIC0tc3RlcC10ZXh0OiAjRUZFRkVGOwogIC0tbmF2YmFyLXRyYW5zcGFyZW50OiByZ2JhKDI4LCAyOCwgMjgsIDAuODUpOwogIC0tYnV0dG9uLXByaW1hcnk6IGxpbmVhci1ncmFkaWVudCg5MGRlZywgIzdDM0FFRCwgIzM4QkRGOCk7CiAgLS1idXR0b24tcHJpbWFyeS1ob3ZlcjogbGluZWFyLWdyYWRpZW50KDkwZGVnLCAjOEI1Q0Y2LCAjMEVBNUU5KTsKICAtLWJ1dHRvbi1wcmltYXJ5LWFjdGl2ZTogbGluZWFyLWdyYWRpZW50KDkwZGVnLCAjOEIxQUVGLCAjMDA5OUNDKTsKCiAgZm9udC1zaXplOiAxNnB4OwogIGZvbnQtd2VpZ2h0OiA2MDA7Cn0KCmh0bWxbZGF0YS10aGVtZT0nbGlnaHQnXSB7CiAgLyogTGlnaHQgVGhlbWUgKi8KICAtLWNvbG9yLXRleHQ6ICMyMzI5MzE7CiAgLS1jb2xvci10ZXh0LWludmVydGVkOiAjRUZFRkVGOwogIC0tY29sb3ItYmFja2dyb3VuZDogI0ZFRkVGRTsKICAtLWNvbG9yLWJhY2tncm91bmQtaW52ZXJ0ZWQ6ICMxQzFDMUM7CiAgLS1jb2xvci1ncmF5OiAjMjMyOTMxODA7CiAgLS1zdGVwLWJhY2tncm91bmQ6ICNGM0Y0RjY7CiAgLS1zdGVwLXRleHQ6ICMyMzI5MzE7CiAgLS1uYXZiYXItdHJhbnNwYXJlbnQ6IHJnYmEoMjU1LCAyNTUsIDI1NSwgMC43NSk7CiAgLS1idXR0b24tcHJpbWFyeTogbGluZWFyLWdyYWRpZW50KDkwZGVnLCAjQTAyMEYwLCAjMDBCRkZGKTsKICAtLWJ1dHRvbi1wcmltYXJ5LWhvdmVyOiBsaW5lYXItZ3JhZGllbnQoOTBkZWcsICNCMjRDRjAsICMzM0NDRkYpOwogIC0tYnV0dG9uLXByaW1hcnktYWN0aXZlOiBsaW5lYXItZ3JhZGllbnQoOTBkZWcsICM4QjFBRUYsICMwMDk5Q0MpOwp9Cgpib2R5IHsKICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1jb2xvci1iYWNrZ3JvdW5kKTsKICBjb2xvcjogdmFyKC0tY29sb3ItdGV4dCk7CiAgZm9udC1mYW1pbHk6ICdSb2JvdG8nLCBzYW5zLXNlcmlmOwogIGxpbmUtaGVpZ2h0OiAxLjU7CiAgLXdlYmtpdC1mb250LXNtb290aGluZzogYW50aWFsaWFzZWQ7CiAgLW1vei1vc3gtZm9udC1zbW9vdGhpbmc6IGdyYXlzY2FsZTsKICBwYWRkaW5nOiAwOwogIG1hcmdpbjogMDsKfQo=" media="print" onload="this.media='all'" />
+    <noscript></noscript>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+		(function(m,e,t,r,i,k,a){
+			m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+			m[i].l=1*new Date();
+			for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+			k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+		})(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=103479467', 'ym');
+		ym(103479467, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <!-- /Yandex.Metrika counter -->
+  <script type="module" crossorigin src="/assets/index-BTRASQqB.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-DecPrYkd.css">
+</head>
+<body>
+<div id="app"></div>
+<!-- Yandex.Metrika counter -->
+<noscript><div><img src="https://mc.yandex.ru/watch/103479467" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</body>
+</html>
